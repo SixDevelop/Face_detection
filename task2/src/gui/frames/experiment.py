@@ -115,6 +115,12 @@ class ExperimentFrame(Frame):
             command=lambda: self.parallel_experiment()
         )
 
+        self.show_button = Button(
+            self,
+            text = "show",
+            command=lambda: self.show_images()
+        )
+
         self.canvas = Canvas(self.canvas_frame, width=1000, height=900)
         self.scroll_y = Scrollbar(
             self,
@@ -170,7 +176,9 @@ class ExperimentFrame(Frame):
         self.dct_entry.pack(side=LEFT, padx=10, pady=7, anchor=W)
         self.templ_num_label.pack(side=LEFT, padx=10, pady=7, anchor=W)
         self.templ_num_entry.pack(side=LEFT, padx=10, pady=7, anchor=W)
+        self.show_button.pack(side=LEFT, padx=10, pady=7, anchor=W)
         self.parallel_button.pack(side=TOP, padx=10, pady=7, anchor=W)
+        
 
         # Настройка фрейма с Canvas
         self.canvas.pack(side=TOP)
@@ -267,14 +275,7 @@ class ExperimentFrame(Frame):
                 b = 0
             )
             need_templ.append(masked_templ[1])
-            templ_posx = 50
-            templ_posy = 50
-
-            res_posx = 300
-            res_posy = 50
-
-            mask_posx = 550
-            mask_posy = 50
+            
             
             for index in range(len(need_templ[0])):
                 
@@ -301,19 +302,29 @@ class ExperimentFrame(Frame):
                 # self.canvas.create_image(mask_posx, mask_posy, image=iamg)
                 # self.canvas.itemconfig(self.canvas, image = iamg)
 
-            for index in range(len(self.templates)):
-                print(index)
-                self.canvas.create_image(templ_posx, templ_posy, image=self.templates[index])
-                self.canvas.create_image(res_posx, res_posy, image=self.result_images[index])
-                self.canvas.create_image(mask_posx, mask_posy, image=self.masked_images[index])
-
-                # self.canvas.draw()
-                from time import sleep
-
-                sleep(0.1)
+            
                 # self.canvas.delete(self.templates[index])
 
+    def show_images(self):
+        templ_posx = 50
+        templ_posy = 50
 
+        res_posx = 300
+        res_posy = 50
+
+        mask_posx = 550
+        mask_posy = 50
+
+        for index in range(len(self.templates)):
+            print(index)
+            self.canvas.create_image(templ_posx, templ_posy, image=self.templates[index])
+            self.canvas.create_image(res_posx, res_posy, image=self.result_images[index])
+            self.canvas.create_image(mask_posx, mask_posy, image=self.masked_images[index])
+
+                # self.canvas.draw()
+            from time import sleep
+
+            sleep(0.1)
 
 
     def open_file(self) -> None:
