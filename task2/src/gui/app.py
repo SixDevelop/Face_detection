@@ -22,5 +22,7 @@ class App(Tk):
         self.notebook.add(self.ex_tab, text="Experiment")
         self.notebook.add(self.research_tab, text="Research")
         self.notebook.pack(expand=1, fill="both")
+    def update_picture(self):
+        self.update()
 
         

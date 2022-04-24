@@ -11,9 +11,11 @@ from core.config.config import ALL_METHODS, DATA_PATH
 from core.recognition import parallel_recognition, recognition, single_photo_recognition
 from PIL import Image, ImageTk
 from tkinter import filedialog
+# from gui.app import App
 
 
 class ExperimentFrame(Frame):
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -21,6 +23,7 @@ class ExperimentFrame(Frame):
         self.parallel_frame = Frame(self)
         self.canvas_frame = Frame(self)
         self.img = NaN
+        # self.app = App
 
     # =============== ПОСЛЕДОВАТЕЛЬНАЯ СИСТЕМА ===============
 
@@ -320,7 +323,7 @@ class ExperimentFrame(Frame):
             self.canvas.create_image(templ_posx, templ_posy, image=self.templates[index])
             self.canvas.create_image(res_posx, res_posy, image=self.result_images[index])
             self.canvas.create_image(mask_posx, mask_posy, image=self.masked_images[index])
-
+            self.update()
                 # self.canvas.draw()
             from time import sleep
 
